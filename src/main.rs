@@ -1,8 +1,6 @@
-mod framebuffer;
-mod game_of_life;
-mod patterns;
-
-use framebuffer::Framebuffer;
+use game_of_life::framebuffer::Framebuffer;
+use game_of_life::game_of_life::step;
+use game_of_life::patterns;
 use raylib::prelude::*;
 
 const FB_WIDTH: i32 = 120;
@@ -29,7 +27,7 @@ fn main() {
         .expect("failed to create texture from framebuffer");
 
     while !rl.window_should_close() {
-        game_of_life::step(&mut framebuffer);
+        step(&mut framebuffer);
 
         texture
             .update_texture(&framebuffer.color_buffer.get_image_data_u8(false))
